@@ -17,6 +17,10 @@ def cleanup(string):
     return string
 
 
+PERSON_MAP = {
+    '229':  'Q55372604',
+}
+
 PARTY_MAP = {
     'Conservative': 'Q9626',
     'Garforth & Swillington Independents': 'Q55465979',
@@ -67,6 +71,7 @@ BASE_URL = 'https://democracy.leeds.gov.uk/mgMemberIndex.aspx?VW=TABLE&PIC=1&FN=
 parsedMembers = []
 unreconciledWards = []
 unreconciledParties = []
+unreconciledPeople = []
 
 print('(i) Scraping from ' + BASE_URL)
 
@@ -99,6 +104,11 @@ for row in rows[1:]:
     idRegex = re.search('mgUserInfo\.aspx\?UID=([0-9]+)', linkHref)
     memberData['id'] = idRegex.group(1)
 
+    if memberData['id'] in PERSON_MAP:
+        memberData['wikidata_id'] = PERSON_MAP[memberData['id']]
+    else:
+        unreconciledPeople.append(memberData['name'])
+
     memberData['url'] = cleanup('https://democracy.leeds.gov.uk/mgUserInfo.aspx?UID=' + memberData['id'])
 
     partyName = row.cssselect('td')[2].text
@@ -123,6 +133,8 @@ for row in rows[1:]:
 
 print('(i) Done.')
 print '(i) Counted {} Members in total'.format(len(parsedMembers))
+print '<!> {} unreconciled people:'.format(len(unreconciledPeople))
+print unreconciledPeople
 print '<!> {} unreconciled wards:'.format(len(unreconciledWards))
 print unreconciledWards
 print '<!> {} unreconciled parties:'.format(len(unreconciledParties))
