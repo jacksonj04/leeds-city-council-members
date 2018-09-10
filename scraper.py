@@ -138,6 +138,7 @@ def scrape_member_page(id):
             sessionDetails['ward_id'] = ward_id
         else:
             sessionDetails['current'] = False
+            sessionDetails['end'] = end
 
 
         memberSessions.append(merge_two_dicts(memberData, sessionDetails))
