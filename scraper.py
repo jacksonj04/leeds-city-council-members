@@ -74,8 +74,8 @@ def scrape_member_page(id):
 
     print('        Name: ' + memberData['name'])
 
-    memberData['party'] = get_content_of_label(pageRoot, 'Party')
-    memberData['ward'] = get_content_of_label(pageRoot, 'Ward')
+    party = get_content_of_label(pageRoot, 'Party')
+    ward = get_content_of_label(pageRoot, 'Ward')
 
     # Check to see if the person is reconciled or not
     if memberData['lcc_id'] in lcc_id_map.people_ids:
@@ -84,16 +84,18 @@ def scrape_member_page(id):
         unreconciledPeople.append(memberData['name'] + ' (' + memberdata['lcc_id'] + ')')
 
     # Check to see if the party is reconciled or not
-    if memberData['party'] in lcc_id_map.party_names:
-        memberData['party_id'] = lcc_id_map.party_names[memberData['party']]
-    elif memberData['party'] is not None:
-        unreconciledParties.append(memberData['party'])
+    if party in lcc_id_map.party_names:
+        party_id = lcc_id_map.party_names[party]
+    elif party is not None:
+        unreconciledParties.append(party)
+        party_id = None
 
     # Check to see if the ward is reconciled or not
-    if memberData['ward'] in lcc_id_map.ward_names:
-        memberData['ward_id'] = lcc_id_map.ward_names[memberData['ward']]
-    elif memberData['ward'] is not None:
-        unreconciledPeople.append(memberData['ward'])
+    if ward in lcc_id_map.ward_names:
+        ward_id = lcc_id_map.ward_names[ward]
+    elif ward is not None:
+        unreconciledPeople.append(ward)
+        ward_id = None
 
     terms = pageRoot.xpath('//h2[contains(text(),\'Terms of Office\')]/following::ul[1]/li')
 
@@ -120,20 +122,24 @@ def scrape_member_page(id):
         else:
             end = None
 
+        sessionDetails = {
+            'id': id + '-' + start,
+            'start': start
+        }
+
         start_date = dt.strptime(startRaw, "%Y-%m-%d")
         if start_date >= CURRENT_DATE:
             has_current_term = True
-            current = True
-            end = None
+            sessionDetails['current'] = True
+            sessionDetails['end'] = None
+            sessionDetails['party'] = party
+            sessionDetails['party_id'] = party_id
+            sessionDetails['ward'] = ward
+            sessionDetails['ward_id'] = ward_id
         else:
-            current = False
+            sessionDetails['current'] = False
 
-        sessionDetails = {
-            'id': id + '-' + start,
-            'start': start,
-            'end': end,
-            'current': current
-        }
+
         memberSessions.append(merge_two_dicts(memberData, sessionDetails))
 
     # Need a current term but don't yet have one? Inject a fake one!
