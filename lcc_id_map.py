@@ -119,7 +119,7 @@ party_names = {
 
 ward_names = {
     'Adel and Wharfedale': 'Q55466756',
-    'Alwoodley': 'Q2131866',
+    'Alwoodley': 'Q56651541',
     'Ardsley and Robin Hood': 'Q55466797',
     'Armley': 'Q55466825',
     'Beeston and Holbeck': 'Q55466755',
@@ -147,7 +147,7 @@ ward_names = {
     'Otley and Yeadon': 'Q55466766',
     'Pudsey': 'Q55466813',
     'Rothwell': 'Q55466765',
-    'Roundhay': 'Q2735485',
+    'Roundhay': 'Q56651558',
     'Temple Newsam': 'Q55466781',
     'Weetwood': 'Q55466759',
     'Wetherby': 'Q55466810',
