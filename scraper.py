@@ -114,34 +114,41 @@ def scrape_member_page(id):
 
         # Explode it into two bits
         parts = term.text.split('-')
-        startRaw = parse_date(parts[0].strip())
-        start = startRaw + 'T00:00:00Z'
-        endRaw = parse_date(parts[1].strip())
-        if endRaw:
-            end = endRaw + 'T00:00:00Z'
+
+        if len(parts) == 2:
+            startRaw = parse_date(parts[0].strip())
+            start = startRaw + 'T00:00:00Z'
+            endRaw = parse_date(parts[1].strip())
+            if endRaw:
+                end = endRaw + 'T00:00:00Z'
+            else:
+                end = None
+
+            sessionDetails = {
+                'id': id + '-' + start,
+                'start': start
+            }
+
+            start_date = dt.strptime(startRaw, "%Y-%m-%d")
+            if start_date >= CURRENT_DATE:
+                has_current_term = True
+                sessionDetails['current'] = True
+                sessionDetails['end'] = None
+                sessionDetails['party'] = party
+                sessionDetails['party_id'] = party_id
+                sessionDetails['ward'] = ward
+                sessionDetails['ward_id'] = ward_id
+            else:
+                sessionDetails['current'] = False
+                sessionDetails['end'] = end
+
+
+            memberSessions.append(merge_two_dicts(memberData, sessionDetails))
+
+            print('                Added term ' + term.text + '.')
+
         else:
-            end = None
-
-        sessionDetails = {
-            'id': id + '-' + start,
-            'start': start
-        }
-
-        start_date = dt.strptime(startRaw, "%Y-%m-%d")
-        if start_date >= CURRENT_DATE:
-            has_current_term = True
-            sessionDetails['current'] = True
-            sessionDetails['end'] = None
-            sessionDetails['party'] = party
-            sessionDetails['party_id'] = party_id
-            sessionDetails['ward'] = ward
-            sessionDetails['ward_id'] = ward_id
-        else:
-            sessionDetails['current'] = False
-            sessionDetails['end'] = end
-
-
-        memberSessions.append(merge_two_dicts(memberData, sessionDetails))
+            print('                Skipped "' + term.text + '", does not appear to be a date range.')
 
     # Need a current term but don't yet have one? Inject a fake one!
     if needs_current_term == True and has_current_term == False:
