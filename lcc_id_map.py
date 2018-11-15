@@ -145,6 +145,7 @@ party_names = {
     'Garforth & Swillington Independents': 'Q55465979',
     'Green Party': 'Q9669',
     'Labour': 'Q9630',
+    'Labour & Co-operative Party': 'Q6467393',
     'Liberal Democrats': 'Q9624',
     'Morley Borough Independents': 'Q55465915',
 }
