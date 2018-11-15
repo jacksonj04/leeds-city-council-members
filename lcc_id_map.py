@@ -5,6 +5,7 @@ people_ids = {
     '111': 'Q55469097',
     '114': 'Q55469185',
     '116': 'Q27929382',  # John Procter
+    '177': 'Q58697780',  # Suzi Armitage
     '179': 'Q56882253',  # Graham Hyde
     '180': 'Q56884293',  # Jack Dunn
     '181': 'Q55469116',
@@ -24,6 +25,7 @@ people_ids = {
     '205': 'Q56882257',  # Josie Jarosz
     '206': 'Q55469172',
     '211': 'Q55726340',  # David Congreve
+    '213': 'Q55726339',  # Ann Castle
     '214': 'Q55469216',
     '218': 'Q57080792',  # Mick Coulson
     '220': 'Q55469177',
@@ -49,6 +51,7 @@ people_ids = {
     '260': 'Q55469236',
     '261': 'Q57080790',  # Brian Selby
     '263': 'Q55738939',  # Neil Taggart
+    '268': 'Q58697785',  # Andrea McKenna
     '269': 'Q55469239',
     '466': 'Q55469132',
     '469': 'Q55726341',  # Judith Chapman
@@ -79,10 +82,13 @@ people_ids = {
     '2634': 'Q55469131',
     '4563': 'Q55469176',
     '4566': 'Q56882251',  # Janette Walker
+    '4564': 'Q58697779',  # Maureen Ingham
+    '4565': 'Q58697786',  # Roger Harington
     '4568': 'Q55469180',
     '4567': 'Q56882252',  # Christine Towler
     '4569': 'Q338032',
     '4570': 'Q30164792',  # Alex Sobel
+    '4571': 'Q58697783',  # Bill Urry
     '4572': 'Q56882258',  # David Nagle
     '4573': 'Q19957188',  # Judith Cummins
     '4576': 'Q55469113',
