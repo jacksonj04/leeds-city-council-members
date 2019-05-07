@@ -12,7 +12,7 @@ import lcc_id_map
 
 CURRENT_MEMBERS_URL = 'https://democracy.leeds.gov.uk/mgMemberIndex.aspx?VW=TABLE&PIC=1&FN='
 # The date past which memberships should be considered 'current'
-CURRENT_DATE = dt.strptime("2018-05-03", "%Y-%m-%d")
+CURRENT_DATE = dt.strptime("2019-05-06", "%Y-%m-%d")
 
 
 def merge_two_dicts(x, y):
@@ -52,7 +52,7 @@ def get_content_of_label(page, label):
 def scrape_member_page(id):
 
     page_url = cleanup('https://democracy.leeds.gov.uk/mgUserInfo.aspx?UID=' + str(id))
-    print '    Scraping ' + page_url
+    print('    Scraping ' + page_url)
 
     html = scraperwiki.scrape(page_url)
     pageRoot = lxml.html.fromstring(html)
@@ -81,7 +81,7 @@ def scrape_member_page(id):
     if memberData['lcc_id'] in lcc_id_map.people_ids:
         memberData['wikidata_id'] = lcc_id_map.people_ids[memberData['lcc_id']]
     else:
-        unreconciledPeople.append(memberData['name'] + ' (' + memberdata['lcc_id'] + ')')
+        unreconciledPeople.append(memberData['name'] + ' (' + memberData['lcc_id'] + ')')
 
     # Check to see if the party is reconciled or not
     if party in lcc_id_map.party_names:
@@ -186,11 +186,11 @@ for row in rows[1:]:
 
     current_member_ids.append(idRegex.group(1))
 
-print '(i) Found {} current members'.format(len(current_member_ids))
+print('(i) Found {} current members'.format(len(current_member_ids)))
 
-ids_to_scrape = set(current_member_ids + lcc_id_map.people_ids.keys())
+ids_to_scrape = set(current_member_ids + list(lcc_id_map.people_ids))
 
-print '(i) Scraping {} members in total'.format(len(ids_to_scrape))
+print('(i) Scraping {} members in total'.format(len(ids_to_scrape)))
 
 for id in ids_to_scrape:
     parsedMemberships = parsedMemberships + scrape_member_page(id)
@@ -199,13 +199,13 @@ for id in ids_to_scrape:
 
 
 print('(i) Done.')
-print '(i) Counted {} memberships in total'.format(len(parsedMemberships))
-print '<!> {} unreconciled people:'.format(len(unreconciledPeople))
-print unreconciledPeople
-print '<!> {} unreconciled wards:'.format(len(unreconciledWards))
-print unreconciledWards
-print '<!> {} unreconciled parties:'.format(len(unreconciledParties))
-print unreconciledParties
+print('(i) Counted {} memberships in total'.format(len(parsedMemberships)))
+print('<!> {} unreconciled people:'.format(len(unreconciledPeople)))
+print(unreconciledPeople)
+print('<!> {} unreconciled wards:'.format(len(unreconciledWards)))
+print(unreconciledWards)
+print('<!> {} unreconciled parties:'.format(len(unreconciledParties)))
+print(unreconciledParties)
 
 
 try:
