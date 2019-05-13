@@ -138,6 +138,15 @@ people_ids = {
     '7129': 'Q55469142',
     '7130': 'Q55469196',
     '7131': 'Q55469094',
+    '7363': 'Q63031248',  # Diane Chapman
+    '7364': 'Q56882256',  # Robert Finnigan
+    '7365': 'Q62225037',  # Lou Cunningham
+    '7366': 'Q62273369',  # Ann Forsaith
+    '7367': 'Q62273334',  # Mirelle Midgley
+    '7368': 'Q62823607',  # Abigail Marshall-Katung
+    '7369': 'Q63031256',  # Trish Smith
+    '7371': 'Q62273427',  # Chris Howley
+    '7370': 'Q62273306',  # Nicole Sharpe
 }
 
 party_names = {
