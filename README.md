@@ -4,6 +4,8 @@ A scraper which looks at the [table of councillors on the Leeds City Council web
 
 This scraper [runs on Morph](https://morph.io/jacksonj04/leeds-city-council-members) on a daily basis.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/b65763a805de7e4711ea/maintainability)](https://codeclimate.com/github/jacksonj04/leeds-city-council-members/maintainability)
+
 ## Why?
 
 The data is used to inform two comparisons with the data in Wikidata, with the aim of keeping Wikidata up to date. These are:
