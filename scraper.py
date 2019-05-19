@@ -11,8 +11,6 @@ import lcc_id_map
 
 
 CURRENT_MEMBERS_URL = 'https://democracy.leeds.gov.uk/mgMemberIndex.aspx?VW=TABLE&PIC=1&FN='
-# The date past which memberships should be considered 'current'
-CURRENT_DATE = dt.strptime("2019-05-06", "%Y-%m-%d")
 
 
 def merge_two_dicts(x, y):
@@ -129,8 +127,9 @@ def scrape_member_page(id):
                 'start': start
             }
 
-            start_date = dt.strptime(startRaw, "%Y-%m-%d")
-            if start_date >= CURRENT_DATE:
+            end_date = dt.strptime(endRaw, "%Y-%m-%d")
+            if end_date >= dt.now():
+                print('                Found current term ' + term.text + '.')
                 has_current_term = True
                 sessionDetails['current'] = True
                 sessionDetails['end'] = None
@@ -139,6 +138,7 @@ def scrape_member_page(id):
                 sessionDetails['ward'] = ward
                 sessionDetails['ward_id'] = ward_id
             else:
+                print('                Found non-current term ' + term.text + '.')
                 sessionDetails['current'] = False
                 sessionDetails['end'] = end
 
