@@ -147,6 +147,7 @@ people_ids = {
     '7369': 'Q63031256',  # Trish Smith
     '7371': 'Q62273427',  # Chris Howley
     '7370': 'Q62273306',  # Nicole Sharpe
+    '8588': 'Q62273338',  # Linda Richards
 }
 
 party_names = {
